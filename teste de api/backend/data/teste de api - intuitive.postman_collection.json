@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "96ed931e-4874-49b2-ac52-58aa96359b3a",
+		"name": "teste de api - intuitive",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41960819"
+	},
+	"item": [
+		{
+			"name": "buscar operadora por cidade",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/consultar_relatorio/?query=campinas",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "8000",
+					"path": ["consultar_relatorio", ""],
+					"query": [{"key": "query", "value": "campinas"}]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "buscar operadora por nome incompleto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/consultar_relatorio/?query=claro",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "8000",
+					"path": ["consultar_relatorio", ""],
+					"query": [{"key": "query", "value": "casa"}]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "buscar operadora por nome",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/consultar_relatorio/?query=claro campinas",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "8000",
+					"path": ["consultar_relatorio", ""],
+					"query": [{"key": "query", "value": "claro"}]
+				}
+			},
+			"response": []
+		}
+	]
+}
