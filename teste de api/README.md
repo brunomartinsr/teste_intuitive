@@ -16,7 +16,7 @@ Este projeto consiste na implementação de uma API para realizar consultas em u
 - **Axios**: Cliente HTTP para comunicação com a API.
 
 ### **Hospedagem**
-- Utilizei o Vercel para hospedar o projeto e manter on-line
+- Utilizei o Vercel para hospedar o projeto e manter on-line, endereço: https://teste-intuitive.vercel.app
 
 ## Estrutura do Projeto
 
