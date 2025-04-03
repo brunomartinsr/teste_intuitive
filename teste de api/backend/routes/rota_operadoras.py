@@ -9,26 +9,26 @@ dataFrame = pd.read_csv("data/Relatorio_cadop.csv", dtype=str, sep=";", encoding
 def consultar_relatorio(query: str = Query(..., description="Texto para buscar operadoras")):
     query = query.lower().strip()
 
-    colunas_texto = ["Razao_Social", "Nome_Fantasia", "Cidade", "UF"]
-    dataFrame[colunas_texto] = dataFrame[colunas_texto].apply(lambda x: x.str.strip().fillna(""))
+    text_columns = ["Razao_Social", "Nome_Fantasia", "Cidade", "UF"]
+    dataFrame[text_columns] = dataFrame[text_columns].apply(lambda x: x.str.strip().fillna(""))
 
-    filtro = (
+    filter = (
         dataFrame["Razao_Social"].str.contains(query, case=False, na=False) |
         dataFrame["Nome_Fantasia"].str.contains(query, case=False, na=False) |
         dataFrame["Cidade"].str.contains(query, case=False, na=False) |
         dataFrame["UF"].str.contains(query, case=False, na=False)
     )
 
-    resultados = dataFrame[filtro].copy()
+    result = dataFrame[filter].copy()
 
-    resultados["prioridade"] = (
-        resultados["Razao_Social"].str.lower().str.startswith(query).astype(int) +
-        resultados["Nome_Fantasia"].str.lower().str.startswith(query).astype(int)
+    result["prioridade"] = (
+        result["Razao_Social"].str.lower().str.startswith(query).astype(int) +
+        result["Nome_Fantasia"].str.lower().str.startswith(query).astype(int)
     )
 
-    resultados = resultados.sort_values(by=["prioridade"], ascending=False).drop(columns=["prioridade"])
+    result = result.sort_values(by=["prioridade"], ascending=False).drop(columns=["prioridade"])
 
-    resultados = resultados.where(pd.notna(resultados), None) 
+    result = result.where(pd.notna(result), None) 
 
-    print(resultados)
-    return resultados.to_dict(orient="records")
+    print(result)
+    return result.to_dict(orient="records")

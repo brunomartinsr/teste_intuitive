@@ -23,34 +23,34 @@ else:
 #Criando a pasta para armazenar os PDFs
 os.makedirs("pdfs_baixados", exist_ok=True)
 
-arquivos_baixados = [] # Lista para armazenar os arquivos baixados
+downloaded_files = [] # Lista para armazenar os arquivos baixados
 # Baixando os PDFs
 for pdf_url in pdfs:
     if pdf_url.startswith("/"): # Verificando se o link é relativo (sem domínio)
         pdf_url = "https://www.gov.br" + pdf_url
 
-    pdf_nome = pdf_url.split("/")[-1]
-    pdf_path = os.path.join("pdfs_baixados", pdf_nome)
+    pdf_name = pdf_url.split("/")[-1]
+    pdf_path = os.path.join("pdfs_baixados", pdf_name)
 
     try:
         pdf_res = requests.get(pdf_url, timeout=10)# Realiza o download com timeout
         pdf_res.raise_for_status()#Verificando o status do download
         
     except requests.exceptions.RequestException as e:#Tratando possíveis erros
-        print(f"Erro ao baixar o {pdf_nome}: {e}")
+        print(f"Erro ao baixar o {pdf_name}: {e}")
         continue
 
     with open(pdf_path, "wb") as file:
         file.write(pdf_res.content) # Acessa a pasta criada e escreve o conteúdo
 
-    arquivos_baixados.append(pdf_path) # Adiciona o caminho do PDF à lista
-    print(f"Baixado com sucesso: {pdf_nome}")
+    downloaded_files.append(pdf_path) # Adiciona o caminho do PDF à lista
+    print(f"Baixado com sucesso: {pdf_name}")
 
 print("\nPDFs Baixados")
 
-arquivo_zip = "arquivos.zip"
-with zipfile.ZipFile(arquivo_zip, "w") as zip:#Compacta os arquivos
-    for file in arquivos_baixados:
+zip_file = "arquivos.zip"
+with zipfile.ZipFile(zip_file, "w") as zip:#Compacta os arquivos
+    for file in downloaded_files:
         zip.write(file, os.path.basename(file))
 
-print(f"\nConfira os arquivos em {arquivo_zip}")
+print(f"\nConfira os arquivos em {zip_file}")
