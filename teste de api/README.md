@@ -1,7 +1,7 @@
 # Teste de API - Intuitive
 ## Este README possui uma rápida explicação sobre a solução do teste 4 (teste de API) e também algumas características que achei importante comentar
 
-Este projeto consiste na implementação de uma API para realizar consultas em uma lista de operadoras armazenada em um arquivo CSV. O frontend foi desenvolvido com para interagir com a API, e os testes de requisição foram documentados em uma coleção do Postman assim como foi pedido no enunciado
+Este projeto consiste na implementação de uma API para realizar consultas em uma lista de operadoras armazenada em um arquivo CSV. O frontend foi desenvolvido com para interagir com a API, e os testes de requisição foram documentados em uma coleção do Postman assim como foi pedido no enunciador, também como um acréscimo, hospedei o projeto no Vercel
 
 ## tecnologias utilizadas para a resolução
 
@@ -14,6 +14,9 @@ Este projeto consiste na implementação de uma API para realizar consultas em u
 ### **Frontend (Vue.js)**
 - **Vue.js**: Framework progressivo para construção da interface web.
 - **Axios**: Cliente HTTP para comunicação com a API.
+
+### **Hospedagem**
+- Utilizei o Vercel para hospedar o projeto e manter on-line
 
 ## Estrutura do Projeto
 
