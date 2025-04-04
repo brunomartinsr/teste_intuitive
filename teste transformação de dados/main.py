@@ -4,7 +4,7 @@ import os
 import pdfplumber
 import pandas as pd
 
-pdf_url = "https://www.gov.br/ans/pt-br/acesso-a-informacao/participacao-da-sociedade/atualizacao-do-rol-de-procedimentos/Anexo_I_Rol_2021RN_465.2021_RN627L.2024.pdf"
+pdf_url = "https://www.gov.br/ans/pt-br/acesso-a-informacao/participacao-da-sociedade/atualizacao-do-rol-de-procedimentos/Anexo_I_Rol_2021RN_465.2021_RN627L.2024.pdf"#pegando url do arquivo
 pdf_file = "Anexo_1.pdf"
 
 res = requests.get(pdf_url)#coleta o PDF da url definida acima
@@ -25,19 +25,19 @@ with pdfplumber.open(pdf_file) as pdf:#Coleta as tabelas página por página
 dataFrame = pd.DataFrame(data)#coleta os dados e armazena como um data frame
 dataFrame.columns = dataFrame.iloc[0]#Definindo a primeira linha (cabeçalho) como nome das colunas
 
-dataFrame.rename(columns={
+dataFrame.rename(columns={ #Substituindo as abreviações das colunas como pedido no desafio
     "OD": "Seg. Odontológica",
     "AMB": "Seg. Ambulatórial",
 }, inplace = True)
 
-dataFrame = dataFrame.dropna(how="all")
+dataFrame = dataFrame.dropna(how="all")# Otimizando os dados (removendo linhas vazias e espaços)
 dataFrame = dataFrame.map(lambda x: x.strip() if isinstance(x, str) else x)
 
 csv_file = "Tabela_Anexo1.csv"
-dataFrame.to_csv(csv_file, index = False, encoding = "utf-8-sig", sep = ";")
+dataFrame.to_csv(csv_file, index = False, encoding = "utf-8-sig", sep = ";")#salvando o data frame em csv
 
 zip_file = "Teste_Bruno_Martins_Rodrigues.zip"
-with zipfile.ZipFile(zip_file, "w", zipfile.ZIP_DEFLATED) as zip:
+with zipfile.ZipFile(zip_file, "w", zipfile.ZIP_DEFLATED) as zip:#Compactando o arquivo csv
     zip.write(csv_file, os.path.basename(csv_file))
     
 print(f"CSV compactado em {zip_file}")

@@ -1,12 +1,12 @@
 import axios from "axios"
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL
-});
+    baseURL: "http://127.0.0.1:8000"
+})
 
 export const searchOperators = async (query) => {
     try {
-        const res = await api.get(`/consultar_relatorio/`, {
+        const res = await api.get("/consultar_relatorio/", {
             params: { query: query.trim() }
         })
         console.log(res.data)

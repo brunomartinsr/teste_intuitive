@@ -6,20 +6,20 @@ import "@/styles/operadoras.css"
 
 export default {
   setup() {
-    const query = ref("");
+    const query = ref("");//variáveis reativas
     const result = ref([]);
 
-    const search = async () => {
-      if (query.value.length > 2) {
-        result.value = await searchOperators(query.value);
+    const search = async () => { //Chamando a função de busca da API
+      if (query.value.length > 2) {// O usuário tem que ter digitado 3 caracteres no mínimo
+        result.value = await searchOperators(query.value); //chamando a função
       } else {
-        result.value = [];
+        result.value = []; //limpa o result.value para não ter buscas desnecessárias
       }
     };
 
-    const debouncedSearch = _.debounce(search, 500);
+    const debouncedSearch = _.debounce(search, 500);// evitando muitas requisições
 
-    return { query, result, debouncedSearch };
+    return { query, result, debouncedSearch }; //retornando para o template
   },
 };
 </script>
@@ -27,13 +27,14 @@ export default {
 <template>
   <div class="container">
     <h2>Buscar Operadora</h2>
+    <!-- campo de busca -->
     <input 
       v-model="query" 
       @input="debouncedSearch" 
       placeholder="Digite a cidade ou nome" 
       class="search-input"
     />
-    
+    <!-- exibindo os resultados -->
     <ul v-if="result.length" class="result-list">
       <li v-for="operadora in result" :key="operadora.Registro_ANS" class="result-item">
         <strong>{{ operadora.Nome_Fantasia || operadora.Razao_Social }}</strong> 
